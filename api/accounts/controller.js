@@ -60,8 +60,7 @@ exports.post = (req, res) => {
   const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
 
   req.body.password = bcrypt.hashSync(req.body.password, salt);
-  models.accounts
-    .create(req.body)
+  models.Accounts.create(req.body)
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
