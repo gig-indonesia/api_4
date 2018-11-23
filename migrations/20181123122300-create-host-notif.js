@@ -1,23 +1,24 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Notifications", {
+    return queryInterface.createTable("HostNotifs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      description: {
+      artistName: {
         type: Sequelize.STRING
       },
-      event: {
+      status: {
         type: Sequelize.STRING
       },
-      appliedGigsId: {
-        type: Sequelize.INTEGER(),
+      hostId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: "AppliedGigs",
+          model: "Hosts",
           key: "id"
         }
       },
@@ -32,6 +33,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Notifications");
+    return queryInterface.dropTable("HostNotifs");
   }
 };
