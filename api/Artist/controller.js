@@ -10,7 +10,7 @@ exports.getAll = (req, res) => {
 };
 
 exports.createArtist = (req, res) => {
-  models.Artists.create(req.body)
+  models.Artist.create(req.body)
     .then(Artist => res.send(Artist))
     .catch(err => console.log(err));
 };

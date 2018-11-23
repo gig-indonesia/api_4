@@ -60,7 +60,7 @@ exports.login = (req, res) => {
 };
 
 //insert data---------------------
-exports.post = (req, res) => {
+exports.register = (req, res) => {
   const SALT_WORK_FACTOR = 7;
   const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
 

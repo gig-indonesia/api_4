@@ -15,6 +15,18 @@ module.exports = (sequelize, DataTypes) => {
     video: {
       type: DataTypes.STRING
     },
+    about: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    phone: {
+      type: DataTypes.STRING(15),
+      allowNull: false
+    },
     accountId: {
       type: DataTypes.INTEGER,
       allowNull: false,

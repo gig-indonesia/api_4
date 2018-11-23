@@ -4,17 +4,17 @@ module.exports = (sequelize, DataTypes) => {
     "HostNotif",
     {
       artistName: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       status: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       }
     },
     {}
   );
   HostNotif.associate = function(models) {
     // associations can be defined here
-    models.createGigs.hasMany(models.HostNotif, {
+    models.CreateGigs.hasMany(models.HostNotif, {
       foreignKey: "hostId",
       targetKey: "id"
     });

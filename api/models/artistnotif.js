@@ -4,14 +4,14 @@ module.exports = (sequelize, DataTypes) => {
     "ArtistNotif",
     {
       gigName: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       status: {
-        type: Sequelize.ENUM("approved", "rejected", "invited")
+        type: DataTypes.ENUM("approved", "rejected", "invited")
       },
       createGigsId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "CreateGigs",
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       artistId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "Artists",
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   ArtistNotif.associate = function(models) {
     // associations can be defined here
-    models.createGigs.hasMany(models.ArtistNotif, {
+    models.CreateGigs.hasMany(models.ArtistNotif, {
       foreignKey: "createGigsId",
       targetKey: "id"
     });
