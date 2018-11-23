@@ -8,17 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      date: {
-        type: Sequelize.DATE(),
-        allowNull: false
-      },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM("pending", "approved", "reject"),
+        allowNull: false
       },
       artistId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
           model: "Artists",
           key: "id"
@@ -27,7 +23,6 @@ module.exports = {
       createGigsId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
           model: "CreateGigs",
           key: "id"

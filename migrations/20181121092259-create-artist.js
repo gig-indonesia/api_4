@@ -22,6 +22,18 @@ module.exports = {
       video: {
         type: Sequelize.STRING
       },
+      about: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      phone: {
+        type: Sequelize.STRING(15),
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

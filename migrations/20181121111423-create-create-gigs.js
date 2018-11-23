@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false
       },
       budget: {
-        type: Sequelize.STRING,
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: false
       },
       date: {
@@ -28,6 +28,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       location: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      latLng: {
         type: Sequelize.STRING,
         allowNull: false
       },

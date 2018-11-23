@@ -16,7 +16,6 @@ module.exports = {
       },
       appliedGigsId: {
         type: Sequelize.INTEGER(),
-        unique: true,
         references: {
           model: "AppliedGigs",
           key: "id"
