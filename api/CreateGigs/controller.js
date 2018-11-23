@@ -1,8 +1,12 @@
 const models = require("../models");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
+  models.CreateGigs.findAll()
+    .then(creategig => res.send(creategig))
+    .catch(err => console.log(err));
+};
+
+exports.getCreated = (req, res) => {
   models.CreateGigs.findAll({
     where: {
       id: req.params.id

@@ -4,6 +4,7 @@ const controller = require("./controller");
 
 router.get("/:id", controller.search);
 router.get("/", controller.getAll);
+router.get("/:id", controller.getCreated);
 router.post("/", controller.createGig);
 router.delete("/:id", controller.deleteOne);
 router.put("/:id", controller.update);
