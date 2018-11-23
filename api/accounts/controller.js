@@ -1,21 +1,26 @@
 const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Sequelize = require("sequelize");
 
-exports.getAll = (req, res) => {
-  models.accounts
-    .findAll()
-    .then(accounts => res.send(accounts))
+module.exports.getAll = (req, res) => {
+  models.Accounts.findAll()
+    .then(accounts => {
+      console.log(accounts);
+      res.send(accounts);
+    })
     .catch(err => console.log(err));
 };
 
 exports.login = (req, res) => {
-  models.accounts
-    .findOne({
-      where: {
-        email: req.body.email
-      }
-    })
+  const Op = Sequelize.Op;
+
+  models.Accounts.findOne({
+    where: {
+      // email: req.body.email
+      [Op.or]: [{ email: req.body.login }, { username: req.body.login }]
+    }
+  })
     .then(account => {
       if (account === null) {
         return res.send("account not found");
@@ -66,33 +71,30 @@ exports.post = (req, res) => {
 };
 
 exports.deleteOne = (req, res) => {
-  models.accounts
-    .findOne({ where: { id: req.params.id } })
+  models.Accounts.findOne({ where: { id: req.params.id } })
     .then(accounts => accounts.destroy())
     .then(result => res.send(result))
     .catch(err => res.send(err));
 };
 
 // exports.deleteAll = (req, res) => {
-//   models.accounts
+//   models.Accounts
 // }
 
 exports.search = (req, res) => {
-  models.accounts
-    .findAll({
-      where: req.query
-    })
+  models.Accounts.findAll({
+    where: req.query
+  })
     .then(accounts => res.send(accounts))
     .catch(err => res.send(err));
 };
 
 exports.update = (req, res) => {
-  models.accounts
-    .update(req.body, {
-      where: {
-        id: req.params.id
-      }
-    })
+  models.Accounts.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  })
     .then(result => res.send(result))
     .catch(err => console.log(err));
 };

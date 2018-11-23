@@ -34,7 +34,6 @@ module.exports = {
       hostId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
           model: "Hosts",
           key: "id"

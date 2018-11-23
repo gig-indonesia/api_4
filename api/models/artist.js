@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Artist.associate = function(models) {
     // associations can be defined here
-    models.Artist.hasOne(models.Accounts, {
+    models.Accounts.hasOne(models.Artist, {
       foreignKey: "accountId",
       targetKey: "id"
     });

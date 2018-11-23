@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Notifications.associate = function(models) {
     // associations can be defined here
-    models.Notifications.hasOne(models.AppliedGigs, {
+    models.AppliedGigs.hasOne(models.Notifications, {
       onDelete: "CASCADE",
       as: "AppliedGigs",
       foreignKey: {

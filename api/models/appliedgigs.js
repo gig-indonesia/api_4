@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   AppliedGigs.associate = function(models) {
-    models.AppliedGigs.hasOne(models.Artists, {
+    models.Artists.hasmany(models.AppliedGigs, {
       foreignKey: "artistsId",
       onDelete: "CASCADE",
       as: "artists",
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   AppliedGigs.associate = function(models) {
-    models.AppliedGigs.hasOne(models.CreateGigs, {
+    models.CreateGigs.hasMany(models.AppliedGigs, {
       foreignKey: "createGigsId",
       onDelete: "CASCADE",
       as: "createGigs",
