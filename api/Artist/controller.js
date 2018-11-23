@@ -3,8 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
-  models.accounts
-    .findAll()
+  models.Artist.findAll()
     .then(accounts => res.send(accounts))
     .catch(err => res.send(err));
 };
@@ -27,21 +26,19 @@ exports.createArtist = (req, res) => {
 // }
 
 exports.search = (req, res) => {
-  models.accounts
-    .findAll({
-      where: req.query
-    })
+  models.Artist.findAll({
+    where: req.query
+  })
     .then(accounts => res.send(accounts))
     .catch(err => res.send(err));
 };
 
 exports.update = (req, res) => {
-  models.accounts
-    .update(req.body, {
-      where: {
-        id: req.params.id
-      }
-    })
+  models.Artist.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  })
     .then(result => res.send(result))
     .catch(err => console.log(err));
 };
