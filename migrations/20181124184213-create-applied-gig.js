@@ -1,32 +1,32 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Hosts", {
+    return queryInterface.createTable("AppliedGigs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING,
+      status: {
+        type: Sequelize.ENUM("pending", "approved", "reject"),
         allowNull: false
       },
-      company: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      accountId: {
+      artistId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
         references: {
-          model: "Accounts",
+          model: "Artists",
+          key: "id"
+        }
+      },
+      createGigsId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+        references: {
+          model: "CreateGigs",
           key: "id"
         }
       },
@@ -41,6 +41,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Hosts");
+    return queryInterface.dropTable("AppliedGigs");
   }
 };

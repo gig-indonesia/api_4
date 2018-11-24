@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Accounts = sequelize.define(
-    "Accounts",
+  const Account = sequelize.define(
+    "Account",
     {
       username: {
         type: DataTypes.STRING,
@@ -14,11 +14,17 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: true
+        }
       }
     },
     {}
   );
-
-  return Accounts;
+  Account.associate = function(models) {
+    // associations can be defined here
+  };
+  return Account;
 };

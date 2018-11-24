@@ -1,33 +1,49 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("ArtistNotifs", {
+    return queryInterface.createTable("Artists", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      gigName: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      status: {
-        type: Sequelize.ENUM("approved", "rejected", "invited")
+      type: {
+        type: Sequelize.ENUM("solo", "group"),
+        allowNull: false
       },
-      createGigsId: {
-        type: Sequelize.INTEGER,
+      photo: {
+        type: Sequelize.STRING
+      },
+      video: {
+        type: Sequelize.STRING
+      },
+      about: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      email: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: {
-          model: "CreateGigs",
-          key: "id"
+        unique: true,
+        validate: {
+          isEMail: true
         }
       },
-      artistId: {
+      phone: {
+        type: Sequelize.STRING(15),
+        allowNull: false
+      },
+      accountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        unique: true,
         references: {
-          model: "Artists",
+          model: "Accounts",
           key: "id"
         }
       },
@@ -42,6 +58,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("ArtistNotifs");
+    return queryInterface.dropTable("Artists");
   }
 };

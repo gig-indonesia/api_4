@@ -1,45 +1,35 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("CreateGigs", {
+    return queryInterface.createTable("Hosts", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      budget: {
-        type: Sequelize.DECIMAL(10, 2),
-        allowNull: false
-      },
-      date: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      description: {
+      company: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      photo: {
-        type: Sequelize.STRING
-      },
-      location: {
+      email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: true
+        }
       },
-      latLng: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      hostId: {
+      accountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        unique: true,
         references: {
-          model: "Hosts",
+          model: "Accounts",
           key: "id"
         }
       },
@@ -54,6 +44,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("CreateGigs");
+    return queryInterface.dropTable("Hosts");
   }
 };

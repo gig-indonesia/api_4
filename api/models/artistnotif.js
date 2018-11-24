@@ -1,44 +1,51 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const ArtistNotif = sequelize.define(
-    "ArtistNotif",
-    {
-      gigName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      status: {
-        type: DataTypes.ENUM("approved", "rejected", "invited")
-      },
-      createGigsId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "CreateGigs",
-          key: "id"
-        }
-      },
-      artistId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Artists",
-          key: "id"
-        }
+  const ArtistNotif = sequelize.define("ArtistNotif", {
+    gigName: {
+      type: Sequelize.STRING
+    },
+    status: {
+      type: Sequelize.ENUM("approved", "rejected", "invited")
+    },
+    artistId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      unique: true,
+      references: {
+        model: "Artists",
+        key: "id"
       }
     },
-    {}
-  );
+    createGigsId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      unique: true,
+      references: {
+        model: "CreateGigs",
+        key: "id"
+      }
+    }
+  });
   ArtistNotif.associate = function(models) {
     // associations can be defined here
-    models.CreateGigs.hasMany(models.ArtistNotif, {
-      foreignKey: "createGigsId",
-      targetKey: "id"
+    models.Artist.hasmany(models.ArtistNotif, {
+      foreignKey: "artistsId",
+      onDelete: "CASCADE",
+      as: "Artists",
+      foreignKey: {
+        allowNull: false
+      }
     });
+  };
 
-    models.Artist.hasMany(models.ArtistNotif, {
-      foreignKey: "artistId",
-      targetKey: "id"
+  ArtistNotif.associate = function(models) {
+    models.CreateGig.hasMany(models.ArtistNotif, {
+      foreignKey: "createGigsId",
+      onDelete: "CASCADE",
+      as: "CreateGigs",
+      foreignKey: {
+        allowNull: false
+      }
     });
   };
   return ArtistNotif;

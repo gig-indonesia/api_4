@@ -21,7 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
     },
     phone: {
       type: DataTypes.STRING(15),
@@ -39,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Artist.associate = function(models) {
     // associations can be defined here
-    models.Accounts.hasOne(models.Artist, {
+    models.Account.hasOne(models.Artist, {
       foreignKey: "accountId",
       targetKey: "id"
     });

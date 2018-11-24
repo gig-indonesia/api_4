@@ -1,6 +1,6 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const AppliedGigs = sequelize.define("AppliedGigs", {
+  const AppliedGig = sequelize.define("AppliedGig", {
     date: {
       type: DataTypes.DATE,
       allowNull: false
@@ -28,11 +28,12 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  AppliedGigs.associate = function(models) {
-    models.Artists.hasmany(models.AppliedGigs, {
+  AppliedGig.associate = function(models) {
+    // associations can be defined here
+    models.Artist.hasmany(models.AppliedGig, {
       foreignKey: "artistsId",
       onDelete: "CASCADE",
-      as: "artists",
+      as: "Artists",
       foreignKey: {
         allowNull: false
       }
@@ -40,30 +41,14 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   AppliedGigs.associate = function(models) {
-    models.CreateGigs.hasMany(models.AppliedGigs, {
+    models.CreateGig.hasMany(models.AppliedGig, {
       foreignKey: "createGigsId",
       onDelete: "CASCADE",
-      as: "createGigs",
+      as: "CreateGigs",
       foreignKey: {
         allowNull: false
       }
     });
   };
-
-  // Artist.associate = function(models) {
-  //   // associations can be defined here
-  //   models.Artist.hasOne(models.Accounts, {
-  //     foreignKey: "accountId",
-  //     targetKey: "id"
-  //   });
-  // };
-
-  // AppliedGigs.associate = function(models) {
-  //   // associations can be defined here
-  //   models.AppliedGigs.hasOne(models.CreateGigs, {
-  //     foreignKey: "createGigsId",
-  //     targetKey: "id"
-  //   });
-  // };
-  return AppliedGigs;
+  return AppliedGig;
 };
