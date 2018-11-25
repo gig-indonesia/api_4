@@ -7,7 +7,7 @@ const app = express();
 const accounts = require("./api/accounts");
 const hosts = require("./api/Hosts");
 const artist = require("./api/Artists");
-const appliedGigs = require("./api/appliedGigs");
+const appliedGigs = require("./api/AppliedGigs");
 const createGigs = require("./api/CreateGigs");
 // const notification = require("./api/notification");
 const bodyParser = require("body-parser");
@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/host", hosts);
 app.use("/accounts", accounts);
 app.use("/artist", artist);
-app.use("/appliedGigs", appliedGigs);
+app.use("/appliedGig", appliedGigs);
 app.use("/creategig", createGigs);
 // app.use("/notification", notification);
 

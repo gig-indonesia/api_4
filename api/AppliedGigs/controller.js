@@ -3,19 +3,17 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
-  models.accounts
-    .findAll()
-    .then(accounts => res.send(accounts))
+  models.AppliedGig.findAll()
+    .then(appliedgig => res.send(appliedgig))
     .catch(err => console.log(err));
 };
 
 exports.login = (req, res) => {
-  models.accounts
-    .findOne({
-      where: {
-        email: req.body.email
-      }
-    })
+  models.AppliedGig.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
     .then(account => {
       if (account === null) {
         return res.send("account not found");
