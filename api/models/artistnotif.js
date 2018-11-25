@@ -2,13 +2,13 @@
 module.exports = (sequelize, DataTypes) => {
   const ArtistNotif = sequelize.define("ArtistNotif", {
     gigName: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     status: {
-      type: Sequelize.ENUM("approved", "rejected", "invited")
+      type: DataTypes.ENUM("approved", "rejected", "invited")
     },
     artistId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
       references: {
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     createGigsId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
       references: {
@@ -26,26 +26,39 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+  // ArtistNotif.associate = function(models) {
+  //   // associations can be defined here
+  //   models.Artist.hasMany(models.ArtistNotif, {
+  //     foreignKey: "artistsId",
+  //     onDelete: "CASCADE",
+  //     as: "Artists",
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
   ArtistNotif.associate = function(models) {
     // associations can be defined here
-    models.Artist.hasmany(models.ArtistNotif, {
+    models.Artist.hasMany(models.ArtistNotif, {
       foreignKey: "artistsId",
-      onDelete: "CASCADE",
-      as: "Artists",
-      foreignKey: {
-        allowNull: false
-      }
+      targetKey: "id"
     });
   };
 
+  // ArtistNotif.associate = function(models) {
+  //   models.CreateGig.hasMany(models.ArtistNotif, {
+  //     foreignKey: "createGigsId",
+  //     onDelete: "CASCADE",
+  //     as: "CreateGigs",
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
   ArtistNotif.associate = function(models) {
     models.CreateGig.hasMany(models.ArtistNotif, {
       foreignKey: "createGigsId",
-      onDelete: "CASCADE",
-      as: "CreateGigs",
-      foreignKey: {
-        allowNull: false
-      }
+      targetKey: "id"
     });
   };
   return ArtistNotif;

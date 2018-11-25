@@ -1,13 +1,13 @@
 const models = require("../models");
 
 exports.getAll = (req, res) => {
-  models.CreateGigs.findAll()
+  models.CreateGig.findAll()
     .then(creategig => res.send(creategig))
     .catch(err => console.log(err));
 };
 
 exports.getCreated = (req, res) => {
-  models.CreateGigs.findAll({
+  models.CreateGig.findAll({
     where: {
       id: req.params.id
     },
@@ -18,8 +18,8 @@ exports.getCreated = (req, res) => {
     .catch(err => console.log(err));
 };
 
-exports.createGig = (req, res) => {
-  models.CreateGigs.create(req.body)
+exports.creategig = (req, res) => {
+  models.CreateGig.create(req.body)
     .then(CreateGig => res.send(CreateGig))
     .catch(err => console.log(err));
 };

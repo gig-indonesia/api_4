@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  AppliedGigs.associate = function(models) {
+  AppliedGig.associate = function(models) {
     models.CreateGig.hasMany(models.AppliedGig, {
       foreignKey: "createGigsId",
       onDelete: "CASCADE",

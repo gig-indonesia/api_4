@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       budget: {
-        type: Sequelize.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
       },
       date: {
@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true
       },
       location: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      latLng: {
         type: DataTypes.STRING,
         allowNull: false
       },

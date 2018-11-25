@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const Sequelize = require("sequelize");
 
 module.exports.getAll = (req, res) => {
-  models.Accounts.findAll()
+  models.Account.findAll()
     .then(accounts => {
       console.log(accounts);
       res.send(accounts);
@@ -65,7 +65,7 @@ exports.register = (req, res) => {
   const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
 
   req.body.password = bcrypt.hashSync(req.body.password, salt);
-  models.Accounts.create(req.body)
+  models.Account.create(req.body)
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
