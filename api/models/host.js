@@ -32,7 +32,14 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Host.associate = function(models) {
-    models.Host.belongsTo(models.Account);
+    models.Host.hasMany(models.HostNotif, {
+      foreignKey: "hostId",
+      targetKey: "id"
+    });
+    models.Host.belongsTo(models.Account, {
+      foreignKey: "accountId",
+      targetKey: "id"
+    });
     models.Host.hasMany(models.Gig, {
       foreignKey: "hostId",
       targetKey: "id"

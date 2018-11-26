@@ -40,21 +40,17 @@ module.exports = (sequelize, DataTypes) => {
         key: "id"
       }
     }
-    // createGigId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   unique: true,
-    //   references: {
-    //     model: "Gigs",
-    //     key: "id"
-    //   }
-    // }
   });
   Artist.associate = function(models) {
     // associations can be defined here
     models.Artist.belongsTo(models.Account);
     models.Artist.belongsToMany(models.Gig, {
       through: { model: "Applicants" },
+      foreignKey: "artistId",
+      otherKey: "gigsId"
+    });
+    models.Artist.belongsToMany(models.Gig, {
+      through: { model: "HostNotifs" },
       foreignKey: "artistId",
       otherKey: "gigsId"
     });
