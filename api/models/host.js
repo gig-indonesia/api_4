@@ -32,9 +32,9 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Host.associate = function(models) {
-    // associations can be defined here
-    models.Account.hasOne(models.Host, {
-      foreignKey: "accountId",
+    models.Host.belongsTo(models.Account);
+    models.Host.hasMany(models.Gig, {
+      foreignKey: "hostId",
       targetKey: "id"
     });
   };

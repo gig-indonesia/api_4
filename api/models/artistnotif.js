@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
   //   });
   // };
   ArtistNotif.associate = function(models) {
-    models.CreateGig.hasMany(models.ArtistNotif, {
+    models.Gig.hasMany(models.ArtistNotif, {
       foreignKey: "createGigsId",
       targetKey: "id"
     });

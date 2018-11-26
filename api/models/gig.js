@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const CreateGig = sequelize.define(
-    "CreateGig",
+  const Gig = sequelize.define(
+    "Gig",
     {
       title: {
         type: DataTypes.STRING,
@@ -43,12 +43,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  CreateGig.associate = function(models) {
+  Gig.associate = function(models) {
     // associations can be defined here
-    models.Host.hasMany(models.CreateGig, {
+    models.Host.hasMany(models.Gig, {
       foreignKey: "hostId",
       targetKey: "id"
     });
+
+    models.Gig.belongsToMany(models.Artist, {
+      through: { model: models.Applicant },
+      foreignKey: "gigsId",
+      otherKey: "artistId"
+    });
   };
-  return CreateGig;
+  return Gig;
 };

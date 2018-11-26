@@ -1,26 +1,37 @@
 const models = require("../models");
 
 exports.getAll = (req, res) => {
-  models.CreateGig.findAll()
-    .then(creategig => res.send(creategig))
+  models.Gig.findAll()
+    .then(Gig => res.send(Gig))
     .catch(err => console.log(err));
 };
 
-exports.getCreated = (req, res) => {
-  models.CreateGig.findAll({
+exports.getApplicant = (req, res) => {
+  models.Gig.findOne({
     where: {
       id: req.params.id
     },
-    order: ["updatedAt", "DESC"],
-    limit: 10
+    include: ["Artists"]
   })
-    .then(creategig => res.send(creategig))
+    .then(app => res.send(app))
     .catch(err => console.log(err));
 };
 
-exports.creategig = (req, res) => {
-  models.CreateGig.create(req.body)
-    .then(CreateGig => res.send(CreateGig))
+// exports.getCreated = (req, res) => {
+//   models.Gig.findAll({
+//     where: {
+//       id: req.params.id
+//     },
+//     order: ["updatedAt", "DESC"],
+//     limit: 10
+//   })
+//     .then(Gig => res.send(Gig))
+//     .catch(err => console.log(err));
+// };
+
+exports.create = (req, res) => {
+  models.Gig.create(req.body)
+    .then(Gig => res.send(Gig))
     .catch(err => console.log(err));
 };
 
@@ -37,8 +48,8 @@ exports.creategig = (req, res) => {
 // };
 
 exports.deleteOne = (req, res) => {
-  models.CreateGigs.findOne({ where: { id: req.params.id } })
-    .then(creategig => creategig.destroy())
+  models.Gigs.findOne({ where: { id: req.params.id } })
+    .then(Gig => Gig.destroy())
     .then(result => res.send(result))
     .catch(err => res.send(err));
 };
@@ -48,15 +59,15 @@ exports.deleteOne = (req, res) => {
 // }
 
 exports.search = (req, res) => {
-  models.CreateGigs.findAll({
+  models.Gigs.findAll({
     where: req.query
   })
-    .then(creategig => res.send(creategig))
+    .then(Gig => res.send(Gig))
     .catch(err => res.send(err));
 };
 
 exports.update = (req, res) => {
-  models.CreateGigs.update(req.body, {
+  models.Gigs.update(req.body, {
     where: {
       id: req.params.id
     }

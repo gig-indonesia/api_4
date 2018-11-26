@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     hostId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
       references: {
         model: "Hosts",
         key: "id"

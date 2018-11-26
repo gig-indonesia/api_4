@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("AppliedGigs", {
+    return queryInterface.createTable("Applicants", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,24 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.ENUM("pending", "approved", "reject"),
+        type: Sequelize.ENUM("pending", "approved", "rejected"),
         allowNull: false
       },
       artistId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
           model: "Artists",
           key: "id"
         }
       },
-      createGigsId: {
+      gigsId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
-          model: "CreateGigs",
+          model: "Gigs",
           key: "id"
         }
       },
@@ -41,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("AppliedGigs");
+    return queryInterface.dropTable("Applicants");
   }
 };

@@ -12,14 +12,21 @@ module.exports = {
         type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM("accepted", "applied", "rejected")
       },
       hostId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
           model: "Hosts",
+          key: "id"
+        }
+      },
+      applicantId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Applicants",
           key: "id"
         }
       },

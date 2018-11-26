@@ -8,7 +8,7 @@ const accounts = require("./api/accounts");
 const hosts = require("./api/Hosts");
 const artist = require("./api/Artists");
 const appliedGigs = require("./api/AppliedGigs");
-const createGigs = require("./api/CreateGigs");
+const Gigs = require("./api/Gigs");
 // const notification = require("./api/notification");
 const bodyParser = require("body-parser");
 
@@ -22,7 +22,7 @@ app.use("/host", hosts);
 app.use("/accounts", accounts);
 app.use("/artist", artist);
 app.use("/appliedGig", appliedGigs);
-app.use("/creategig", createGigs);
+app.use("/gigs", Gigs);
 // app.use("/notification", notification);
 
 app.listen(PORT, () => console.log(`App running on port ${PORT}`));

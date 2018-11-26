@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.showHost = (req, res) => {
-  models.Hosts.findOne({
+  models.Host.findOne({
     where: {
       id: req.params.id
     }
@@ -13,18 +13,17 @@ exports.showHost = (req, res) => {
 };
 
 exports.createHost = (req, res) => {
-  models.Hosts.create(req.body)
+  models.Host.create(req.body)
     .then(Host => res.send(Host))
     .catch(err => console.log(err));
 };
 
 exports.updateHost = (req, res) => {
-  models.accounts
-    .update(req.body, {
-      where: {
-        id: req.params.id
-      }
-    })
+  models.Host.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  })
     .then(result => res.send(result))
     .catch(err => console.log(err));
 };
