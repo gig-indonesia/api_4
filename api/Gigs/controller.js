@@ -1,3 +1,5 @@
+const multiparty = require("multiparty");
+const S3 = require("../config/S3");
 const models = require("../models");
 
 exports.getAll = (req, res) => {
