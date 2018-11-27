@@ -4,3 +4,5 @@ const controller = require("./controller");
 const helpers = require('./../helpers')
 
 router.post("/",helpers.isAuthenticated, controller.create);
+
+module.exports = router;

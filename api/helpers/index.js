@@ -27,7 +27,7 @@ module.exports = {
                     })
                 }
 
-                req.decoded = decoded
+                req.decoded = account
                 next()
             })
         } catch (err) {

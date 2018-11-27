@@ -11,7 +11,7 @@ exports.getAll = (req, res) => {
 exports.getNotif = (req, res) => {
   models.Artist.findOne({
     where: {
-      id: req.decoded.id
+      accountId: req.decoded.id
     },
     include: [{ model: models.ArtistNotif }]
   })
@@ -22,9 +22,9 @@ exports.getNotif = (req, res) => {
 exports.getApplicant = (req, res) => {
   models.Artist.findOne({
     where: {
-      id: req.params.id
+      accountId: req.decoded.id
     },
-    include: ["Gigs"]
+    include: [{model : models.Gig}]
   })
     .then(app => res.send(app))
     .catch(err => console.log(err));
@@ -64,7 +64,7 @@ exports.search = (req, res) => {
 exports.update = (req, res) => {
   models.Artist.update(req.body, {
     where: {
-      id: req.params.id
+      accountId: req.decoded.id
     }
   })
     .then(result => res.send(result))
