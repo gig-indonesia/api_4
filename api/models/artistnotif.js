@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         key: "id"
       }
     },
-    createGigsId: {
+    gigsId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,

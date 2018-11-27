@@ -6,66 +6,66 @@ module.exports = {
       "ArtistNotifs",
       [
         {
-          gigname: "John Doe1",
+          gigName: "John Doe1",
           status: "approved",
-          artistId: 9,
-          createGigsId: 1,
+          artistId: 1,
+          gigsId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          gigname: "John Doe2",
+          gigName: "John Doe2",
           status: "rejected",
-          artistId: 10,
-          createGigsId: 2,
+          artistId: 2,
+          gigsId: 2,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          gigname: "John Doe3",
+          gigName: "John Doe3",
           status: "invited",
-          artistId: 11,
-          createGigsId: 3,
+          artistId: 3,
+          gigsId: 3,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          gigname: "John Doe4",
+          gigName: "John Doe4",
           status: "approved",
-          artistId: 12,
-          createGigsId: 4,
+          artistId: 4,
+          gigsId: 4,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          gigname: "John Doe5",
+          gigName: "John Doe5",
           status: "approved",
-          artistId: 13,
-          createGigsId: 5,
+          artistId: 5,
+          gigsId: 5,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          gigname: "John Doe6",
+          gigName: "John Doe6",
           status: "approved",
-          artistId: 14,
-          createGigsId: 6,
+          artistId: 6,
+          gigsId: 6,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          gigname: "John Doe7",
+          gigName: "John Doe7",
           status: "approved",
-          artistId: 15,
-          createGigsId: 7,
+          artistId: 7,
+          gigsId: 7,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          gigname: "John Doe8",
+          gigName: "John Doe8",
           status: "approved",
-          artistId: 16,
-          createGigsId: 8,
+          artistId: 8,
+          gigsId: 8,
           createdAt: new Date(),
           updatedAt: new Date()
         }
