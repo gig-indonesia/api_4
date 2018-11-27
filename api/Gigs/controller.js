@@ -1,5 +1,5 @@
 const multiparty = require("multiparty");
-const S3 = require("../config/S3");
+const S3 = require("../../config/S3");
 const models = require("../models");
 
 exports.getAll = (req, res) => {
@@ -19,7 +19,7 @@ exports.getApplicant = (req, res) => {
     .catch(err => console.log(err));
 };
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   try {
     const form = new multiparty.Form();
 
@@ -50,7 +50,7 @@ exports.create = (req, res) => {
   }
 };
 
-exports.deleteOne = (req, res) => {
+exports.deleteOne = async (req, res) => {
   try {
     const gig = await models.Gig.findOne({ where: { id: req.params.id } });
 
