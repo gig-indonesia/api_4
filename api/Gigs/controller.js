@@ -25,7 +25,8 @@ exports.create = async (req, res) => {
 
     form.parse(req, async (err, fields, files) => {
       if (err) return console.log(err);
-
+      console.log(fields);
+      console.log(files);
       const userData = JSON.parse(fields.user_data[0]);
 
       const image = await S3.uploadImage(files.user_image[0].path);

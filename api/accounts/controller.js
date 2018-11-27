@@ -15,7 +15,7 @@ module.exports.getAll = (req, res) => {
 exports.login = (req, res) => {
   const Op = Sequelize.Op;
 
-  models.Accounts.findOne({
+  models.Account.findOne({
     where: {
       // email: req.body.email
       [Op.or]: [{ email: req.body.login }, { username: req.body.login }]
@@ -36,7 +36,7 @@ exports.login = (req, res) => {
       const token_data = {
         payload: {
           id: account.id,
-          name: account.name,
+          username: account.username,
           email: account.email
         },
         secret: process.env.JWT_SECRET,
@@ -71,7 +71,7 @@ exports.register = (req, res) => {
 };
 
 exports.deleteOne = (req, res) => {
-  models.Accounts.findOne({ where: { id: req.params.id } })
+  models.Account.findOne({ where: { id: req.params.id } })
     .then(accounts => accounts.destroy())
     .then(result => res.send(result))
     .catch(err => res.send(err));
@@ -82,7 +82,7 @@ exports.deleteOne = (req, res) => {
 // }
 
 exports.search = (req, res) => {
-  models.Accounts.findAll({
+  models.Account.findAll({
     where: req.query
   })
     .then(accounts => res.send(accounts))
@@ -90,7 +90,7 @@ exports.search = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  models.Accounts.update(req.body, {
+  models.Account.update(req.body, {
     where: {
       id: req.params.id
     }
