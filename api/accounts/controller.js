@@ -21,7 +21,7 @@ exports.login = (req, res) => {
       [Op.or]: [{ email: req.body.login }, { username: req.body.login }]
     }
   })
-    .then(account => {
+    .then(async account => {
       if (account === null) {
         return res.send("account not found");
       }
@@ -33,6 +33,23 @@ exports.login = (req, res) => {
       if (valuePassword === false) {
         return res.send("password is not valid");
       }
+
+      let accountType = "";
+      const host = await models.Host.findOne({
+        where: { accountId: account.id }
+      }).then(artist => artist);
+      const artist = await models.Artist.findOne({
+        where: { accountId: account.id }
+      }).then(artist => artist);
+
+      console.log(host, artist);
+
+      if (host === null || host === undefined) {
+        accountType = "Artist";
+      } else {
+        accountType = "Host";
+      }
+
       const token_data = {
         payload: {
           id: account.id,
@@ -53,7 +70,8 @@ exports.login = (req, res) => {
       res.send({
         message: "You are logged in",
         id: account.id,
-        token: token
+        token: token,
+        accountType: accountType
       });
     })
     .catch(err => res.send(err));
