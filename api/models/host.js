@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "hostId",
       targetKey: "id"
     });
+
     models.Host.belongsTo(models.Account, {
       foreignKey: "accountId",
       targetKey: "id"

@@ -8,6 +8,17 @@ exports.getAll = (req, res) => {
     .catch(err => res.send(err));
 };
 
+exports.getNotif = (req, res) => {
+  models.Artist.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [{ model: models.ArtistNotif }]
+  })
+    .then(host => res.send(host))
+    .catch(err => console.log(err));
+};
+
 exports.getApplicant = (req, res) => {
   models.Artist.findOne({
     where: {

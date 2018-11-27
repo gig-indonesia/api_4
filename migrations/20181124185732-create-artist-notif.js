@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      gigname: {
+      gigName: {
         type: Sequelize.STRING
       },
       status: {
@@ -22,7 +22,7 @@ module.exports = {
           key: "id"
         }
       },
-      createGigsId: {
+      gigsId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

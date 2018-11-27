@@ -54,6 +54,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "artistId",
       otherKey: "gigsId"
     });
+    models.Artist.hasMany(models.ArtistNotif, {
+      foreignKey: "artistId",
+      targetKey: "id"
+    });
   };
 
   return Artist;

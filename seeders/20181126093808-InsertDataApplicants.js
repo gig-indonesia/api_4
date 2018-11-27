@@ -7,56 +7,56 @@ module.exports = {
       [
         {
           status: "pending",
-          artistId: 9,
+          artistId: 1,
           gigsId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           status: "approved",
-          artistId: 10,
+          artistId: 2,
           gigsId: 2,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           status: "rejected",
-          artistId: 11,
+          artistId: 3,
           gigsId: 3,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           status: "approved",
-          artistId: 12,
+          artistId: 4,
           gigsId: 4,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           status: "rejected",
-          artistId: 13,
+          artistId: 5,
           gigsId: 5,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           status: "pending",
-          artistId: 14,
+          artistId: 6,
           gigsId: 6,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           status: "approved",
-          artistId: 15,
+          artistId: 7,
           gigsId: 7,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           status: "rejected",
-          artistId: 16,
+          artistId: 8,
           gigsId: 8,
           createdAt: new Date(),
           updatedAt: new Date()

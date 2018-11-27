@@ -1,13 +1,21 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   const HostNotif = sequelize.define("HostNotif", {
-    name: {
+    artistName: {
       type: DataTypes.STRING
     },
     status: {
       type: DataTypes.ENUM("accepted", "applied", "rejected")
     },
     gigsId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Gigs",
+        key: "id"
+      }
+    },
+    hostId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -22,22 +30,15 @@ module.exports = (sequelize, DataTypes) => {
         model: "Artists",
         key: "id"
       }
-    },
-    hostId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Hosts",
-        key: "id"
-      }
     }
   });
 
   HostNotif.associate = function(models) {
     // associations can be defined here
-    models.HostNotif.belongsTo(models.Host);
-    models.HostNotif.hasMany(models.Gig);
-    models.HostNotif.hasMany(models.Artist);
+    models.HostNotif.belongsTo(models.Host, {
+      foreignKey: "hostId",
+      targetKey: "id"
+    });
   };
   return HostNotif;
 };

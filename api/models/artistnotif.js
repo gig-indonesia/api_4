@@ -26,38 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  // ArtistNotif.associate = function(models) {
-  //   // associations can be defined here
-  //   models.Artist.hasMany(models.ArtistNotif, {
-  //     foreignKey: "artistsId",
-  //     onDelete: "CASCADE",
-  //     as: "Artists",
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+
   ArtistNotif.associate = function(models) {
     // associations can be defined here
-    models.Artist.hasMany(models.ArtistNotif, {
-      foreignKey: "artistsId",
-      targetKey: "id"
-    });
-  };
-
-  // ArtistNotif.associate = function(models) {
-  //   models.CreateGig.hasMany(models.ArtistNotif, {
-  //     foreignKey: "createGigsId",
-  //     onDelete: "CASCADE",
-  //     as: "CreateGigs",
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
-  ArtistNotif.associate = function(models) {
-    models.Gig.hasMany(models.ArtistNotif, {
-      foreignKey: "createGigsId",
+    models.ArtistNotif.belongsTo(models.Artist, {
+      foreignKey: "artistId",
       targetKey: "id"
     });
   };

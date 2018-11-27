@@ -16,18 +16,10 @@ exports.showNotif = (req, res) => {
     where: {
       id: req.params.id
     },
-    include: [
-      {
-        model: models.HostNotif,
-        include: [
-          {
-            model: models.Gig,
-            include: [{ model: models.Artist }]
-          }
-        ]
-      }
-    ]
-  });
+    include: [{ model: models.HostNotif }]
+  })
+    .then(host => res.send(host))
+    .catch(err => console.log(err));
 };
 
 exports.createHost = (req, res) => {

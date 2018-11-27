@@ -6,66 +6,74 @@ module.exports = {
       "HostNotifs",
       [
         {
-          name: "The Bagindo",
+          artistName: "The Bagindo",
           status: "accepted",
           hostId: 1,
-          applicantId: 17,
+          gigsId: 1,
+          artistId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "sule",
+          artistName: "sule",
           status: "applied",
           hostId: 2,
-          applicantId: 18,
+          gigsId: 1,
+          artistId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "Black magic",
+          artistName: "Black magic",
           status: "rejected",
           hostId: 3,
-          applicantId: 19,
+          gigsId: 2,
+          artistId: 2,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "Green Day",
+          artistName: "Green Day",
           status: "accepted",
           hostId: 4,
-          applicantId: 20,
+          gigsId: 2,
+          artistId: 3,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "Dangdut Pantura",
+          artistName: "Dangdut Pantura",
           status: "applied",
           hostId: 5,
-          applicantId: 21,
+          gigsId: 3,
+          artistId: 4,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "The groove",
+          artistName: "The groove",
           status: "rejected",
           hostId: 6,
-          applicantId: 22,
+          gigsId: 4,
+          artistId: 5,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "The brandals",
+          artistName: "The brandals",
           status: "accepted",
           hostId: 7,
-          applicantId: 23,
+          gigsId: 5,
+          artistId: 6,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "The kop",
+          artistName: "The kop",
           status: "applied",
           hostId: 8,
-          applicantId: 24,
+          gigsId: 6,
+          artistId: 7,
           createdAt: new Date(),
           updatedAt: new Date()
         }

@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      artistName: {
         type: Sequelize.STRING
       },
       status: {
@@ -22,11 +22,19 @@ module.exports = {
           key: "id"
         }
       },
-      applicantId: {
+      gigsId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Applicants",
+          model: "Gigs",
+          key: "id"
+        }
+      },
+      artistId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Artists",
           key: "id"
         }
       },
