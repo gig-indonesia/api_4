@@ -17,46 +17,50 @@ exports.getApplicant = (req, res) => {
     .catch(err => console.log(err));
 };
 
-// exports.getCreated = (req, res) => {
-//   models.Gig.findAll({
-//     where: {
-//       id: req.params.id
-//     },
-//     order: ["updatedAt", "DESC"],
-//     limit: 10
-//   })
-//     .then(Gig => res.send(Gig))
-//     .catch(err => console.log(err));
-// };
-
 exports.create = (req, res) => {
-  models.Gig.create(req.body)
-    .then(Gig => res.send(Gig))
-    .catch(err => console.log(err));
+  try {
+    const form = new multiparty.Form();
+
+    form.parse(req, async (err, fields, files) => {
+      if (err) return console.log(err);
+
+      const userData = JSON.parse(fields.user_data[0]);
+
+      const image = await S3.uploadImage(files.user_image[0].path);
+
+      console.log(image);
+
+      const gig = await models.Gig.create({
+        title: userData.title,
+        budget: userData.budget,
+        date: userData.date,
+        description: userData.description,
+        location: userData.location,
+        latLng: userData.latLng,
+        hostId: userData.hostId,
+        photo: image.Key
+      });
+
+      res.json({ gig });
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
-
-//insert data---------------------
-// exports.post = (req, res) => {
-//   const SALT_WORK_FACTOR = 7;
-//   const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
-
-//   req.body.password = bcrypt.hashSync(req.body.password, salt);
-//   models.accounts
-//     .create(req.body)
-//     .then(account => res.send(account))
-//     .catch(err => res.send(err));
-// };
 
 exports.deleteOne = (req, res) => {
-  models.Gigs.findOne({ where: { id: req.params.id } })
-    .then(Gig => Gig.destroy())
-    .then(result => res.send(result))
-    .catch(err => res.send(err));
-};
+  try {
+    const gig = await models.Gig.findOne({ where: { id: req.params.id } });
 
-// exports.deleteAll = (req, res) => {
-//   models.accounts
-// }
+    await S3.deleteImage(gig.image);
+
+    await gig.destroy();
+
+    res.json({ gig });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 exports.search = (req, res) => {
   models.Gigs.findAll({
