@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("./controller");
+const helpers = require('./../helpers')
 
 router.get("/:id", controller.search);
-router.get("/", controller.getAll);
+router.get("/" ,helpers.isAuthenticated, controller.getAll);
 router.post("/login", controller.login);
 router.post("/register", controller.register);
 router.delete("/:id", controller.deleteOne);

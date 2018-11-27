@@ -11,7 +11,7 @@ exports.getAll = (req, res) => {
 exports.getApplicant = (req, res) => {
   models.Gig.findOne({
     where: {
-      id: req.params.id
+      id: req.decoded.id
     },
     include: ["Artists"]
   })
