@@ -11,7 +11,7 @@ exports.getAll = (req, res) => {
 exports.getNotif = (req, res) => {
   models.Artist.findOne({
     where: {
-      id: req.params.id
+      id: req.decoded.id
     },
     include: [{ model: models.ArtistNotif }]
   })

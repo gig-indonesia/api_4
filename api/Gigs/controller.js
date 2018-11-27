@@ -53,7 +53,7 @@ exports.create = async (req, res) => {
 
 exports.deleteOne = async (req, res) => {
   try {
-    const gig = await models.Gig.findOne({ where: { id: req.params.id } });
+    const gig = await models.Gig.findOne({ where: { id: req.decoded.id } });
 
     await S3.deleteImage(gig.image);
 
@@ -76,7 +76,7 @@ exports.search = (req, res) => {
 exports.update = (req, res) => {
   models.Gigs.update(req.body, {
     where: {
-      id: req.params.id
+      id: req.decoded.id
     }
   })
     .then(result => res.send(result))

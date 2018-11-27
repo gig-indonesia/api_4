@@ -3,7 +3,7 @@ const models = require("../models");
 exports.showHost = (req, res) => {
   models.Host.findOne({
     where: {
-      id: req.params.id
+      id: req.decoded.id
     },
     include: [{ model: models.Gig }]
   })
@@ -14,7 +14,7 @@ exports.showHost = (req, res) => {
 exports.showNotif = (req, res) => {
   models.Host.findOne({
     where: {
-      id: req.params.id
+      id: req.decoded.id
     },
     include: [{ model: models.HostNotif }]
   })
@@ -31,7 +31,7 @@ exports.createHost = (req, res) => {
 exports.updateHost = (req, res) => {
   models.Host.update(req.body, {
     where: {
-      id: req.params.id
+      id: req.decoded.id
     }
   })
     .then(result => res.send(result))
@@ -45,7 +45,7 @@ exports.findAccount = (req, res) => {
   console.log(req.params.id);
   models.Host.findOne({
     where: {
-      id: req.params.id
+      id: req.decoded.id
     },
     include: [{ model: models.Account }]
   })
