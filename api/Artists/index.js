@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("./controller");
-const helpers = require('./../helpers')
+const helpers = require("./../helpers");
 
 router.get("/", controller.getAll);
-router.get("/notif/:id",helpers.isAuthenticated, controller.getNotif);
-router.get("/:id", helpers.isAuthenticated, controller.getApplicant);
+router.get("/notif/:id", helpers.isAuthenticated, controller.getNotif);
+router.get("/applied", helpers.isAuthenticated, controller.getApplicant);
 router.get("/search", controller.search);
-router.post("/", helpers.isAuthenticated, controller.createArtist);
+router.post("/", controller.createArtist);
 // router.delete("/:id", controller.deleteOne);
 // router.put("/:id", controller.search);
 

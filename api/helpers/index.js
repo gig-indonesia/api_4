@@ -28,7 +28,8 @@ module.exports = {
           });
         }
 
-        req.decoded = account;
+        req.decoded = decoded;
+        req.account = account;
         next();
       });
     } catch (err) {

@@ -118,5 +118,5 @@ exports.update = (req, res) => {
 };
 
 exports.getCurrentUserData = (req, res) => {
-  res.send(req.decoded);
+  res.send(req.account);
 };

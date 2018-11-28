@@ -22,9 +22,9 @@ exports.getNotif = (req, res) => {
 exports.getApplicant = (req, res) => {
   models.Artist.findOne({
     where: {
-      id: req.params.id
+      artistId: req.decoded.id
     },
-    include: ["Gigs"]
+    include: [{ model: models.Gig }]
   })
     .then(app => res.send(app))
     .catch(err => console.log(err));
@@ -38,7 +38,7 @@ exports.getApplicant = (req, res) => {
 
 exports.createArtist = (req, res) => {
   models.Artist.create(req.body)
-    .then(Artist => res.send(Artist))
+    .then(artist => res.send(artist))
     .catch(err => console.log(err));
 };
 // exports.deleteOne = (req, res) => {

@@ -1,9 +1,11 @@
 const models = require("../models");
 
 exports.showHost = (req, res) => {
+  console.log(req.decoded);
+  console.log("-------------------");
   models.Host.findOne({
     where: {
-      id: req.decoded.id
+      accountId: req.decoded.id
     },
     include: [{ model: models.Gig }]
   })
@@ -12,6 +14,8 @@ exports.showHost = (req, res) => {
 };
 
 exports.showNotif = (req, res) => {
+  console.log(req.decoded);
+
   models.Host.findOne({
     where: {
       id: req.decoded.id
