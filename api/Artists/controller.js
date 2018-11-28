@@ -54,11 +54,23 @@ exports.createArtist = (req, res) => {
 // }
 
 exports.search = (req, res) => {
-  models.Artist.findAll({
-    where: req.query
+  models.Artist.findOne({
+    where: {
+      id: req.headers.id
+    }
   })
     .then(accounts => res.send(accounts))
     .catch(err => res.send(err));
+};
+
+exports.profile = (req, res) => {
+  models.Artist.findOne({
+    where: {
+      accountId: req.decoded.id
+    }
+  })
+    .then(artist => res.send(artist))
+    .catch(err => console.log(err));
 };
 
 exports.update = (req, res) => {
