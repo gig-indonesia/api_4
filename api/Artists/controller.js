@@ -22,7 +22,7 @@ exports.getNotif = (req, res) => {
 exports.getApplicant = (req, res) => {
   models.Artist.findOne({
     where: {
-      artistId: req.decoded.id
+      accountId: req.decoded.id
     },
     include: [{ model: models.Gig }]
   })
