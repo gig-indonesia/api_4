@@ -103,22 +103,22 @@ exports.updateprofile = async (req, res) => {
 
       console.log(host);
 
-      const artist = await models.Artist.update(
-        {
-          
-          about: userData.about,
-          name: userData.name,
-          phone: userData.contact,
-          type: userData.artistType,
-          photo: image.Key
-        },
-        {
-          where: {
-            accountId: req.decoded.id
-          }
-        }
-      );
-
+      const artist = await models.Artist.findOne({
+        where: { accountId: req.decoded.id }
+      })
+        .then(res =>
+          res
+            .update({
+              about: userData.about,
+              name: userData.name,
+              phone: userData.contact,
+              type: userData.artistType,
+              photo: image.Key
+            })
+            .then(upd => res.send(upd))
+            .catch(err => console.log(err))
+        )
+        .catch();
       res.json({ artist });
     });
   } catch (err) {
