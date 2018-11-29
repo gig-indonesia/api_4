@@ -101,12 +101,14 @@ exports.updateprofile = async (req, res) => {
       //   }
       // });
 
-      console.log(host);
 
       const artist = await models.Artist.findOne({
         where: { accountId: req.decoded.id }
       })
-        .then(res =>
+        .then(res => {
+          console.log('------------- Response -------')
+          console.log(res)
+          console.log('--------- end ------')
           res
             .update({
               about: userData.about,
@@ -116,8 +118,8 @@ exports.updateprofile = async (req, res) => {
               photo: image.Key
             })
             .then(upd => res.send(upd))
-            .catch(err => console.log(err))
-        )
+            .catch(err => console.log(err));
+        })
         .catch();
       res.json({ artist });
     });
