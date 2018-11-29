@@ -105,11 +105,12 @@ exports.updateprofile = async (req, res) => {
 
       const artist = await models.Artist.update(
         {
-          photo: image.Key,
+          
           about: userData.about,
           name: userData.name,
           phone: userData.contact,
-          type: userData.artistType
+          type: userData.artistType,
+          photo: image.Key
         },
         {
           where: {
