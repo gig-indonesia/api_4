@@ -11,9 +11,9 @@ exports.getAll = (req, res) => {
 exports.getApplicant = (req, res) => {
   models.Gig.findOne({
     where: {
-      id: req.decoded.id
+      id: req.params.id
     },
-    include: ["Artists"]
+    include: [{ model: models.Artist }]
   })
     .then(app => res.send(app))
     .catch(err => console.log(err));
@@ -45,6 +45,7 @@ exports.create = async (req, res) => {
         location: userData.location,
         latLng: userData.latLng,
         hostId: host.id,
+        time: userData.time,
         photo: image.Key
       });
 

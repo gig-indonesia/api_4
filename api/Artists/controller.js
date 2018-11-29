@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
-  models.Artist.findAll({ limit: 3, order: [["createdAt", "DESC"]] })
+  models.Artist.findAll({ limit: 10, order: [["createdAt", "DESC"]] })
     .then(accounts => res.send(accounts))
     .catch(err => res.send(err));
 };

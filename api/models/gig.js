@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false
       },
+      time: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
       description: {
         type: DataTypes.STRING,
         allowNull: false
@@ -56,11 +60,11 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "artistId"
     });
 
-    models.Gig.belongsToMany(models.Artist, {
-      through: { model: models.HostNotif },
-      foreignKey: "gigsId",
-      otherKey: "artistId"
-    });
+    // models.Gig.belongsToMany(models.Artist, {
+    //   through: { model: models.HostNotif },
+    //   foreignKey: "gigsId",
+    //   otherKey: "artistId"
+    // });
   };
   return Gig;
 };
