@@ -1,9 +1,11 @@
 const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const multiparty = require("multiparty");
+const S3 = require("../../config/S3");
 
 exports.getAll = (req, res) => {
-  models.Artist.findAll({ limit: 3, order: [["createdAt", "DESC"]] })
+  models.Artist.findAll({ limit: 10, order: [["createdAt", "DESC"]] })
     .then(accounts => res.send(accounts))
     .catch(err => res.send(err));
 };
@@ -24,7 +26,7 @@ exports.getApplicant = (req, res) => {
     where: {
       accountId: req.decoded.id
     },
-    include: [{model : models.Gig}]
+    include: [{ model: models.Gig }]
   })
     .then(app => res.send(app))
     .catch(err => console.log(err));
@@ -38,7 +40,7 @@ exports.getApplicant = (req, res) => {
 
 exports.createArtist = (req, res) => {
   models.Artist.create(req.body)
-    .then(Artist => res.send(Artist))
+    .then(artist => res.send(artist))
     .catch(err => console.log(err));
 };
 // exports.deleteOne = (req, res) => {
@@ -54,11 +56,23 @@ exports.createArtist = (req, res) => {
 // }
 
 exports.search = (req, res) => {
-  models.Artist.findAll({
-    where: req.query
+  models.Artist.findOne({
+    where: {
+      id: req.headers.id
+    }
   })
     .then(accounts => res.send(accounts))
     .catch(err => res.send(err));
+};
+
+exports.profile = (req, res) => {
+  models.Artist.findOne({
+    where: {
+      accountId: req.decoded.id
+    }
+  })
+    .then(artist => res.send(artist))
+    .catch(err => console.log(err));
 };
 
 exports.update = (req, res) => {
@@ -69,4 +83,44 @@ exports.update = (req, res) => {
   })
     .then(result => res.send(result))
     .catch(err => console.log(err));
+};
+
+exports.updateprofile = async (req, res) => {
+  try {
+    const form = new multiparty.Form();
+
+    form.parse(req, async (err, fields, files) => {
+      if (err) return console.log(err);
+      const userData = JSON.parse(fields.user_data[0]);
+
+      const image = await S3.uploadImage(files.user_image[0].path);
+      // console.log(req.decoded.id);
+      // const host = await models.Host.findOne({
+      //   where: {
+      //     accountId: req.decoded.id
+      //   }
+      // });
+
+      console.log(host);
+
+      const artist = await models.Artist.update(
+        {
+          photo: image.Key,
+          about: userData.about,
+          name: userData.name,
+          phone: userData.contact,
+          type: userData.artistType
+        },
+        {
+          where: {
+            accountId: req.decoded.id
+          }
+        }
+      );
+
+      res.json({ artist });
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };

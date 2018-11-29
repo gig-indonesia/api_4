@@ -56,11 +56,11 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "artistId"
     });
 
-    models.Gig.belongsToMany(models.Artist, {
-      through: { model: models.HostNotif },
-      foreignKey: "gigsId",
-      otherKey: "artistId"
-    });
+    // models.Gig.belongsToMany(models.Artist, {
+    //   through: { model: models.HostNotif },
+    //   foreignKey: "gigsId",
+    //   otherKey: "artistId"
+    // });
   };
   return Gig;
 };

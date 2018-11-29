@@ -52,14 +52,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "artistId",
       otherKey: "gigsId"
     });
-
-    models.Artist.belongsToMany(models.Gig, {
-      through: { model: "HostNotifs" },
-      foreignKey: "artistId",
-      otherKey: "gigsId",
-      as: "Notifs"
-    });
-
+    // models.Artist.belongsToMany(models.Gig, {
+    //   through: { model: "HostNotifs" },
+    //   foreignKey: "artistId",
+    //   otherKey: "gigsId"
+    // });
     models.Artist.hasMany(models.ArtistNotif, {
       foreignKey: "artistId",
       targetKey: "id",

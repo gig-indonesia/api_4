@@ -3,7 +3,7 @@ const S3 = require("../../config/S3");
 const models = require("../models");
 
 exports.getAll = (req, res) => {
-  models.Gig.findAll()
+  models.Gig.findAll({ order: [["createdAt", "DESC"]] })
     .then(Gig => res.send(Gig))
     .catch(err => console.log(err));
 };
@@ -11,9 +11,9 @@ exports.getAll = (req, res) => {
 exports.getApplicant = (req, res) => {
   models.Gig.findOne({
     where: {
-      id: req.decoded.id
+      id: req.params.id
     },
-    include: ["Artists"]
+    include: [{ model: models.Artist }]
   })
     .then(app => res.send(app))
     .catch(err => console.log(err));
@@ -25,13 +25,17 @@ exports.create = async (req, res) => {
 
     form.parse(req, async (err, fields, files) => {
       if (err) return console.log(err);
-      console.log(fields);
-      console.log(files);
       const userData = JSON.parse(fields.user_data[0]);
 
       const image = await S3.uploadImage(files.user_image[0].path);
+      console.log(req.decoded.id);
+      const host = await models.Host.findOne({
+        where: {
+          accountId: req.decoded.id
+        }
+      });
 
-      console.log(image);
+      console.log(host);
 
       const gig = await models.Gig.create({
         title: userData.title,
@@ -40,7 +44,8 @@ exports.create = async (req, res) => {
         description: userData.description,
         location: userData.location,
         latLng: userData.latLng,
-        hostId: userData.hostId,
+        hostId: host.id,
+        time: userData.time,
         photo: image.Key
       });
 

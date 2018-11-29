@@ -116,3 +116,7 @@ exports.update = (req, res) => {
     .then(result => res.send(result))
     .catch(err => console.log(err));
 };
+
+exports.getCurrentUserData = (req, res) => {
+  res.send(req.account);
+};
