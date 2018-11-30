@@ -50,7 +50,8 @@ module.exports = (sequelize, DataTypes) => {
     models.Artist.belongsToMany(models.Gig, {
       through: { model: "Applicants" },
       foreignKey: "artistId",
-      otherKey: "gigsId"
+      otherKey: "gigsId",
+      onDelete: "cascade"
     });
     // models.Artist.belongsToMany(models.Gig, {
     //   through: { model: "HostNotifs" },
