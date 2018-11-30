@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       references: {
         model: "Artists",
-        key: "id"
+        key: "id",
+        onDelete: "cascade"
       }
     },
     gigsId: {
@@ -20,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       references: {
         model: "Gigs",
-        key: "id"
+        key: "id",
+        onDelete: "cascade"
       }
     }
   });
