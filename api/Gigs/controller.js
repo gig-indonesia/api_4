@@ -58,7 +58,15 @@ exports.create = async (req, res) => {
 
 exports.deleteOne = async (req, res) => {
   try {
-    const gig = await models.Gig.findOne({ where: { id: req.decoded.id } });
+    const host = await models.Host.findOne({
+      where: {
+        accountId: req.decoded.id
+      }
+    });
+
+    const gig = await models.Gig.findOne({
+      where: { id: req.params.id, hostId: host.id }
+    });
 
     await S3.deleteImage(gig.image);
 
